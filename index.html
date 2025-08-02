@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Kaira - Bootstrap 5 Fashion Store HTML CSS Template</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="author" content="TemplatesJungle">
+  <meta name="keywords" content="ecommerce,fashion,store">
+  <meta name="description" content="Bootstrap 5 Fashion Store HTML CSS Template">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="css/vendor.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Marcellus&display=swap"
+    rel="stylesheet">
+  
+  <style>
+    /* Navbar Dropdown Fixes */
+    .navbar-nav .dropdown-menu {
+      border: none;
+      border-radius: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      margin-top: 0;
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      min-width: 200px;
+      background: white;
+    }
+    
+    .navbar-nav .dropdown-menu.show {
+      display: block;
+    }
+    
+    .navbar-nav .dropdown-item {
+      padding: 0.75rem 1.5rem;
+      color: #333;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid #f8f9fa;
+    }
+    
+    .navbar-nav .dropdown-item:hover {
+      background-color: #f8f9fa;
+      color: #000;
+      transform: translateX(5px);
+    }
+    
+    .navbar-nav .dropdown-item:last-child {
+      border-bottom: none;
+    }
+    
+    /* Search Popup Styles */
+    .search-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .search-popup.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .search-popup-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 600px;
+      position: relative;
+    }
+    
+    .search-popup form {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    
+    .search-popup input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      font-size: 1.1rem;
+    }
+    
+    .search-popup input:focus {
+      outline: none;
+      border-color: #000;
+    }
+    
+    .search-submit {
+      background: none;
+      border: none;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .cat-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .cat-list-item {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .cat-list-item a {
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .cat-list-item a:hover {
+      color: #000;
+    }
+    
+    /* Alert Styles */
+    .alert {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      border: none;
+      border-radius: 8px;
+    }
+    
+    /* User Avatar Styles */
+    .user-avatar {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      background: #000;
+      color: white;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 30px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    /* Wishlist Button Styles */
+    .btn-wishlist {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    
+    .product-item:hover .btn-wishlist {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .btn-wishlist:hover {
+      background: #f8f9fa;
+      border-color: #000;
+    }
+    
+    .btn-wishlist.active {
+      background: #dc3545;
+      border-color: #dc3545;
+      color: white;
+    }
+    
+    .btn-wishlist.active svg {
+      fill: white;
+    }
+    
+    /* Cart Item Remove Button */
+    .btn-outline-danger {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+    
+    .btn-outline-danger:hover {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      color: white;
+    }
+    
+    /* Product Image Hover Effect */
+    .product-item {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .product-item img {
+      transition: transform 0.3s ease;
+    }
+    
+    .product-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    /* Scroll to Top Button */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: #000;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    
+    .scroll-top:hover {
+      background: #333;
+      transform: translateY(-2px);
+    }
+    
+    /* Modal Enhancements */
+    .modal-content {
+      border-radius: 0;
+      border: none;
+    }
+    
+    .modal-header {
+      background: #f8f9fa;
+    }
+    
+    .form-control:focus {
+      border-color: #000;
+      box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.25);
+    }
+    
+    /* Button Enhancements */
+    .btn-link {
+      position: relative;
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .btn-link:hover {
+      color: #666;
+    }
+    
+    .btn-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #000;
+      transition: width 0.3s ease;
+    }
+    
+    .btn-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Loading Spinner */
+    .spinner-border-sm {
+      width: 1rem;
+      height: 1rem;
+    }
+    
+    /* Product Actions */
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .product-actions .btn {
+      font-size: 0.8rem;
+      padding: 0.25rem 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .product-actions .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Responsive Enhancements */
+    @media (max-width: 768px) {
+      .search-popup-container {
+        width: 95%;
+        padding: 1rem;
+      }
+      
+      .scroll-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+      }
+      
+      .user-avatar {
+        width: 25px;
+        height: 25px;
+        line-height: 25px;
+        font-size: 12px;
+      }
+      
+      .product-actions {
+        flex-direction: column;
+      }
+      
+      .product-actions .btn {
+        width: 100%;
+        margin-bottom: 0.25rem;
+      }
+      
+      /* Mobile dropdown fixes */
+      .navbar-nav .dropdown-menu {
+        border: none;
+        box-shadow: none;
+        background: transparent;
+      }
+      
+      .navbar-nav .dropdown-item {
+        color: #fff;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .navbar-nav .dropdown-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #fff;
+      }
+    }
+  </style>
+</head>
+
+<body class="homepage">
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="instagram" viewBox="0 0 15 15">
+        <path fill="none" stroke="currentColor"
+          d="M11 3.5h1M4.5.5h6a4 4 0 0 1 4 4v6a4 4 0 0 1-4 4h-6a4 4 0 0 1-4-4v-6a4 4 0 0 1 4-4Zm3 10a3 3 0 1 1 0-6a3 3 0 0 1 0 6Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="facebook" viewBox="0 0 15 15">
+        <path fill="none" stroke="currentColor"
+          d="M7.5 14.5a7 7 0 1 1 0-14a7 7 0 0 1 0 14Zm0 0v-8a2 2 0 0 1 2-2h.5m-5 4h5" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="twitter" viewBox="0 0 15 15">
+        <path fill="currentColor"
+          d="m14.478 1.5l.5-.033a.5.5 0 0 0-.871-.301l.371.334Zm-.498 2.959a.5.5 0 1 0-1 0h1Zm-6.49.082h-.5h.5Zm0 .959h.5h-.5Zm-6.99 7V12a.5.5 0 0 0-.278.916L.5 12.5Zm.998-11l.469-.175a.5.5 0 0 0-.916-.048l.447.223Zm3.994 9l.354.353a.5.5 0 0 0-.195-.827l-.159.474Zm7.224-8.027l-.37.336l.18.199l.265-.04l-.075-.495Zm1.264-.94c.051.778.003 1.25-.123 1.606c-.122.345-.336.629-.723 1l.692.722c.438-.42.776-.832.974-1.388c.193-.546.232-1.178.177-2.006l-.998.066Zm0 3.654V4.46h-1v.728h1Zm-6.99-.646V5.5h1v-.959h-1Zm0 .959V6h1v-.5h-1ZM10.525 1a3.539 3.539 0 0 0-3.537 3.541h1A2.539 2.539 0 0 1 10.526 2V1Zm2.454 4.187C12.98 9.503 9.487 13 5.18 13v1c4.86 0 8.8-3.946 8.8-8.813h-1ZM1.03 1.675C1.574 3.127 3.614 6 7.49 6V5C4.174 5 2.421 2.54 1.966 1.325l-.937.35Zm.021-.398C.004 3.373-.157 5.407.604 7.139c.759 1.727 2.392 3.055 4.73 3.835l.317-.948c-2.155-.72-3.518-1.892-4.132-3.29c-.612-1.393-.523-3.11.427-5.013l-.895-.446Zm4.087 8.87C4.536 10.75 2.726 12 .5 12v1c2.566 0 4.617-1.416 5.346-2.147l-.708-.706Zm7.949-8.009A3.445 3.445 0 0 0 10.526 1v1c.721 0 1.37.311 1.82.809l.74-.671Zm-.296.83a3.513 3.513 0 0 0 2.06-1.134l-.744-.668a2.514 2.514 0 0 1-1.466.813l.15.989ZM.222 12.916C1.863 14.01 3.583 14 5.18 14v-1c-1.63 0-3.048-.011-4.402-.916l-.556.832Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="calendar" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <rect width="20" height="18" x="2" y="4" rx="4" />
+          <path d="M8 2v4m8-4v4M2 10h20" />
+        </g>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="shopping-bag" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path
+            d="M3.977 9.84A2 2 0 0 1 5.971 8h12.058a2 2 0 0 1 1.994 1.84l.803 10A2 2 0 0 1 18.833 22H5.167a2 2 0 0 1-1.993-2.16l.803-10Z" />
+          <path d="M16 11V6a4 4 0 0 0-4-4v0a4 4 0 0 0-4 4v5" />
+        </g>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="gift" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <rect width="18" height="14" x="3" y="8" rx="2" />
+          <path d="M12 5a3 3 0 1 0-3 3m6 0a3 3 0 1 0-3-3m0 0v17m9-7H3" />
+        </g>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-cycle" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+          <path
+            d="M22 12c0 6-4.39 10-9.806 10C7.792 22 4.24 19.665 3 16m-1-4C2 6 6.39 2 11.806 2C16.209 2 19.76 4.335 21 8" />
+          <path d="m7 17l-4-1l-1 4M17 7l4 1l1-4" />
+        </g>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="link" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M12 19a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0-4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm-5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm7-12h-1V2a1 1 0 0 0-2 0v1H8V2a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3Zm1 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9h16Zm0-11H4V6a1 1 0 0 1 1-1h1v1a1 1 0 0 0 2 0V5h8v1a1 1 0 0 0 2 0V5h1a1 1 0 0 1 1 1ZM7 15a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0 4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-left" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M17 11H9.41l3.3-3.29a1 1 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33a1 1 0 0 0 0 .76a1 1 0 0 0 .21.33l5 5a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.42L9.41 13H17a1 1 0 0 0 0-2Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-right" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M17.92 11.62a1 1 0 0 0-.21-.33l-5-5a1 1 0 0 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l5-5a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="play" viewBox="0 0 24 24">
+        <g fill="none" fill-rule="evenodd">
+          <path
+            d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z" />
+          <path fill="currentColor"
+            d="M5.669 4.76a1.469 1.469 0 0 1 2.04-1.177c1.062.454 3.442 1.533 6.462 3.276c3.021 1.744 5.146 3.267 6.069 3.958c.788.591.79 1.763.001 2.356c-.914.687-3.013 2.19-6.07 3.956c-3.06 1.766-5.412 2.832-6.464 3.28c-.906.387-1.92-.2-2.038-1.177c-.138-1.142-.396-3.735-.396-7.237c0-3.5.257-6.092.396-7.235Z" />
+        </g>
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="category" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 5.5h-6.28l-.32-1a3 3 0 0 0-2.84-2H5a3 3 0 0 0-3 3v13a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-10a3 3 0 0 0-3-3Zm1 13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1h4.56a1 1 0 0 1 .95.68l.54 1.64a1 1 0 0 0 .95.68h7a1 1 0 0 1 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="calendar" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 4h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm1 15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7h16Zm0-9H4V7a1 1 0 0 1 1-1h2v1a1 1 0 0 0 2 0V6h6v1a1 1 0 0 0 2 0V6h2a1 1 0 0 1 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="heart" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M20.16 4.61A6.27 6.27 0 0 0 12 4a6.27 6.27 0 0 0-8.16 9.48l7.45 7.45a1 1 0 0 0 1.42 0l7.45-7.45a6.27 6.27 0 0 0 0-8.87Zm-1.41 7.46L12 18.81l-6.75-6.74a4.28 4.28 0 0 1 3-7.3a4.25 4.25 0 0 1 3 1.25a1 1 0 0 0 1.42 0a4.27 4.27 0 0 1 6 6.05Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M19 11H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="cart" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M8.5 19a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 8.5 19ZM19 16H7a1 1 0 0 1 0-2h8.491a3.013 3.013 0 0 0 2.885-2.176l1.585-5.55A1 1 0 0 0 19 5H6.74a3.007 3.007 0 0 0-2.82-2H3a1 1 0 0 0 0 2h.921a1.005 1.005 0 0 1 .962.725l.155.545v.005l1.641 5.742A3 3 0 0 0 7 18h12a1 1 0 0 0 0-2Zm-1.326-9l-1.22 4.274a1.005 1.005 0 0 1-.963.726H8.754l-.255-.892L7.326 7ZM16.5 19a1.5 1.5 0 1 0 1.5 1.5a1.5 1.5 0 0 0-1.5-1.5Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="check" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M18.71 7.21a1 1 0 0 0-1.42 0l-7.45 7.46l-3.13-3.14A1 1 0 1 0 5.29 13l3.84 3.84a1 1 0 0 0 1.42 0l8.16-8.16a1 1 0 0 0 0-1.47Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="trash" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M10 18a1 1 0 0 0 1-1v-6a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1ZM20 6h-4V5a3 3 0 0 0-3-3h-2a3 3 0 0 0-3 3v1H4a1 1 0 0 0 0 2h1v11a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8h1a1 1 0 0 0 0-2ZM10 5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h-4Zm7 14a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8h10Zm-3-1a1 1 0 0 0 1-1v-6a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="star-outline" viewBox="0 0 15 15">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+          d="M7.5 9.804L5.337 11l.413-2.533L4 6.674l2.418-.37L7.5 4l1.082 2.304l2.418.37l-1.75 1.793L9.663 11L7.5 9.804Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="star-solid" viewBox="0 0 15 15">
+        <path fill="currentColor"
+          d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="search" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="user" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M15.71 12.71a6 6 0 1 0-7.42 0a10 10 0 0 0-6.22 8.18a1 1 0 0 0 2 .22a8 8 0 0 1 15.9 0a1 1 0 0 0 1 .89h.11a1 1 0 0 0 .88-1.1a10 10 0 0 0-6.25-8.19ZM12 12a4 4 0 1 1 4-4a4 4 0 0 1-4 4Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="close" viewBox="0 0 15 15">
+        <path fill="currentColor"
+          d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="copy" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="preloader text-white fs-6 text-uppercase overflow-hidden"></div>
+
+  <div class="search-popup">
+    <div class="search-popup-container">
+
+      <form role="search" method="get" class="form-group" action="">
+        <input type="search" id="search-form" class="form-control border-0 border-bottom"
+          placeholder="Type and press enter" value="" name="s" />
+        <button type="submit" class="search-submit border-0 position-absolute bg-white"
+          style="top: 15px;right: 15px;"><svg class="search" width="24" height="24">
+            <use xlink:href="#search"></use>
+          </svg></button>
+      </form>
+
+      <h5 class="cat-list-title">Browse Categories</h5>
+
+      <ul class="cat-list">
+        <li class="cat-list-item">
+          <a href="machinery-parts.html" title="Machinery Parts">Machinery Parts</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="hydraulic-parts.html" title="Hydraulic Parts">Hydraulic Parts</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="electrical-parts.html" title="Electrical Parts">Electrical Parts</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="led-light.html" title="LED Light">LED Light</a>
+        </li>
+        <li class="cat-list-item">
+          <a href="spreader-parts.html" title="Spreader Parts">Spreader Parts</a>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Growers cider</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$12</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Fresh grapes</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$8</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Heinz tomato ketchup</h6>
+              <small class="text-body-secondary">Brief description</small>
+            </div>
+            <span class="text-body-secondary">$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>$20</strong>
+          </li>
+        </ul>
+
+        <button class="w-100 btn btn-primary btn-lg" type="button" onclick="proceedToCheckout()">Continue to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg bg-light text-uppercase fs-6 p-3 border-bottom align-items-center position-relative">
+    <div class="container-fluid">
+      <div class="row justify-content-between align-items-center w-100">
+
+        <div class="col-auto">
+        <a class="navbar-brand text-white" href="index.html">
+  <img src="images/logo.png" alt="Your Logo" width="100" height="60">
+</a>
+        </div>
+
+        <div class="col-auto">
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            aria-controls="offcanvasNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+            aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+              <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                aria-label="Close"></button>
+            </div>
+
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 gap-1 gap-md-5 pe-3">
+                <li class="nav-item dropdown">
+                  <a class="nav-link " href="#" id="dropdownHome">Home</a>
+               
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="dropdownShop" data-bs-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">Categories</a>
+                  <ul class="dropdown-menu list-unstyled" aria-labelledby="dropdownShop">
+                    <li>
+                      <a href="machinery-parts.html" class="dropdown-item item-anchor">Machinery Parts </a>
+                    </li>
+                    <li>
+                      <a href="hydraulic-parts.html" class="dropdown-item item-anchor">Hydraulic Parts </a>
+                    </li>
+                    <li>
+                      <a href="electrical-parts.html" class="dropdown-item item-anchor">Electrical Parts </a>
+                    </li>
+                    <li>
+                      <a href="led-light.html" class="dropdown-item item-anchor">LED Light </a>
+                    </li>
+                    <li>
+                      <a href="spreader-parts.html" class="dropdown-item item-anchor">Spreader Parts </a>
+                    </li>
+                  </ul>
+                </li>
+                
+                  <a class="nav-link" href="#">About</a>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="contact.html">Contact</a>
+                </li>
+
+                 
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-3 col-lg-auto">
+          <ul class="list-unstyled d-flex m-0">
+            
+            <li class="d-none d-lg-block">
+              <a href="index.html" class="text-uppercase mx-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                aria-controls="offcanvasCart">Cart <span class="cart-count">(0)</span>
+              </a>
+            </li>
+            <li class="d-lg-none">
+              <a href="#" class="mx-2">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                  <use xlink:href="#heart"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="d-lg-none">
+              <a href="#" class="mx-2" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart"
+                aria-controls="offcanvasCart">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                  <use xlink:href="#cart"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="search-box" class="mx-2">
+              <a href="#search" class="search-button">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                  <use xlink:href="#search"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+  </nav>
+
+  <section id="billboard" class="bg-light py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <h1 class="section-title text-center mt-4" data-aos="fade-up">SIRDAL PORTS SUPPLIES</h1>
+        <div class="col-md-6 text-center" data-aos="fade-up" data-aos-delay="300">
+          <p>High-quality pot supplies ensure optimal growth for plants and artistic expression for pottery enthusiasts. Durable materials like ceramic, terracotta, and fiberglass offer longevity, while drainage features prevent root rot. From seedling trays to decorative planters, our range caters to both functional gardening and aesthetic design!</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="swiper main-swiper py-4" data-aos="fade-up" data-aos-delay="600">
+          <div class="swiper-wrapper d-flex border-animation-left">
+            <div class="swiper-slide">
+              <div class="banner-item image-zoom-effect">
+                <div class="image-holder">
+                  <a href="machinery-parts.html">
+                    <img src="images/Machinery Parts1.png" alt="product" class="img-fluid">
+                  </a>
+                </div>
+                <div class="banner-content py-4">
+                  <h5 class="element-title text-uppercase">
+                    <a href="machinery-parts.html" class="item-anchor">Machinery Parts</a>
+                  </h5>
+                  <p>Essential mechanical components that form the structure and enable the function of machines. They include gears, bearings, shafts, and more. </p>
+                  <div class="btn-left">
+                    
+                  <br>  
+                    <a href="machinery-parts.html" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="banner-item image-zoom-effect">
+                <div class="image-holder">
+                  <a href="hydraulic-parts.html">
+                    <img src="images/Hydraulic Parts1.png" alt="product" class="img-fluid">
+                  </a>
+                </div>
+                <div class="banner-content py-4">
+                  <h5 class="element-title text-uppercase">
+                    <a href="hydraulic-parts.html" class="item-anchor">Hydraulic Parts</a>
+                  </h5>
+                  <p>Hydraulic parts discretion means careful selection, maintenance, use of components like pumps, cylinders, and valves within a system.</p>
+                  <div class="btn-left">
+                    <br>
+                    <a href="hydraulic-parts.html" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="banner-item image-zoom-effect">
+                <div class="image-holder">
+                  <a href="electrical-parts.html">
+                    <img src="images/Electrical Parts1.png" alt="product" class="img-fluid">
+                  </a>
+                </div>
+                <div class="banner-content py-4">
+                  <h5 class="element-title text-uppercase">
+                    <a href="electrical-parts.html" class="item-anchor">Electrical Parts</a>
+                  </h5>
+                  <p>Electrical parts must be chosen and used responsibly, considering safety, function, and appropriate applications.</p>
+                  <div class="btn-left">
+                    <br>
+                    <a href="electrical-parts.html" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="banner-item image-zoom-effect">
+                <div class="image-holder">
+                  <a href="led-light.html">
+                    <img src="images/Led3.webp" alt="product" class="img-fluid">
+                  </a>
+                </div>
+                <div class="banner-content py-4">
+                  <h5 class="element-title text-uppercase">
+                    <a href="led-light.html" class="item-anchor">LED Light</a>
+                  </h5>
+                  <p>LEDs direct light efficiently, converting electricity to focused illumination, unlike omnidirectional incandescent bulbs. </p>
+                  <div class="btn-left">
+                    <a href="led-light.html" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="banner-item image-zoom-effect">
+                <div class="image-holder">
+                  <a href="spreader-parts.html">
+                    <img src="images/spreader parts1.png" alt="product" class="img-fluid">
+                  </a>
+                </div>
+                <div class="banner-content py-4">
+                  <h5 class="element-title text-uppercase">
+                    <a href="spreader-parts.html" class="item-anchor">Spreader Parts</a>
+                  </h5>
+                  <p>A fertilizer spreader typically includes a hopper, agitator, flow control, impeller, and wheels. </p>
+                  <div class="btn-left">
+                    <a href="spreader-parts.html" class="btn-link fs-6 text-uppercase item-anchor text-decoration-none">Discover Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="icon-arrow icon-arrow-left"><svg width="50" height="50" viewBox="0 0 24 24">
+            <use xlink:href="#arrow-left"></use>
+          </svg></div>
+        <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24">
+            <use xlink:href="#arrow-right"></use>
+          </svg></div>
+      </div>
+    </div>
+  </section>
+
+ 
+
+ 
+ 
+  <section class="collection bg-light position-relative py-5">
+    <div class="container">
+      <div class="row">
+        <div class="title-xlarge text-uppercase txt-fx domino">Collection</div>
+        <div class="collection-item d-flex flex-wrap my-5">
+          <div class="col-md-6 column-container">
+            <div class="image-holder">
+              <img src="images/Picture11.png" alt="collection" class="product-image img-fluid">
+            </div>
+          </div>
+          <div class="col-md-6 column-container bg-white">
+            <div class="collection-content p-5 m-0 m-md-5">
+              <h3 class="element-title text-uppercase">Collection</h3>
+              <p>Port supplies are essential for seamless maritime operations, ensuring the smooth flow of goods and services. These include fuel, spare parts, cargo handling equipment, and safety gear, all crucial for efficient port functionality. Reliable supplies prevent delays, support global trade, and maintain vessel readiness. From dock machinery to navigation tools, every component plays a vital role. Strong supply chains and quality inventory management keep ports running smoothly, minimizing disruptions and enhancing productivity. Whether for maintenance, logistics, or safety, well-stocked ports sustain international commerce and maritime efficiency.</p>
+              <a href="#" class="btn btn-dark text-uppercase mt-3">Shop Collection</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="related-products" class="related-products product-carousel py-5 position-relative overflow-hidden">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
+        <h4 class="text-uppercase">You May Also Like</h4>
+        <a href="index.html" class="btn-link">View All Products</a>
+      </div>
+      <div class="swiper product-swiper open-up" data-aos="zoom-out">
+        <div class="swiper-wrapper d-flex">
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="images/High Speed Brake1.png" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">High Speed Brake</a>
+                  </h5>
+                  <div class="product-actions mt-3">
+                    <button class="btn btn-sm btn-outline-dark me-2" onclick="addToCart('High Speed Brake', 299)">Add to Cart</button>
+                    <button class="btn btn-outline-secondary" onclick="window.open('https:wa.link/wxq441', '_blank')">Chat</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="images/Thruster1.png" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Thruster</a>
+                  </h5>
+                  <div class="product-actions mt-3">
+                    <button class="btn btn-sm btn-outline-dark me-2" onclick="addToCart('Thruster', 450)">Add to Cart</button>
+                    <button class="btn btn-outline-secondary" onclick="window.open('https:wa.link/wxq441', '_blank')">Chat</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="images/Telephone1.png" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Telephone</a>
+                  </h5>
+                  <div class="product-actions mt-3">
+                    <button class="btn btn-sm btn-outline-dark me-2" onclick="addToCart('Telephone', 89)">Add to Cart</button>
+                    <button class="btn btn-outline-secondary" onclick="window.open('https:wa.link/wxq441', '_blank')">Chat</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="images/Cable Reel1.png" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Cable Reel</a>
+                  </h5>
+                  <div class="product-actions mt-3">
+                    <button class="btn btn-sm btn-outline-dark me-2" onclick="addToCart('Cable Reel', 150)">Add to Cart</button>
+                    <button class="btn btn-outline-secondary" onclick="window.open('https:wa.link/wxq441', '_blank')">Chat</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="product-item image-zoom-effect link-effect">
+              <div class="image-holder">
+                <a href="index.html">
+                  <img src="images/Encoder1.png" alt="product" class="product-image img-fluid">
+                </a>
+                <a href="index.html" class="btn-icon btn-wishlist">
+                  <svg width="24" height="24" viewBox="0 0 24 24">
+                    <use xlink:href="#heart"></use>
+                  </svg>
+                </a>
+                <div class="product-content">
+                  <h5 class="text-uppercase fs-5 mt-3">
+                    <a href="index.html">Encoder</a>
+                  </h5>
+                  <div class="product-actions mt-3">
+                    <button class="btn btn-sm btn-outline-dark me-2" onclick="addToCart('Encoder', 200)">Add to Cart</button>
+                    <button class="btn btn-outline-secondary" onclick="window.open('https:wa.link/wxq441', '_blank')">Chat</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <div class="icon-arrow icon-arrow-left"><svg width="50" height="50" viewBox="0 0 24 24">
+          <use xlink:href="#arrow-left"></use>
+        </svg></div>
+      <div class="icon-arrow icon-arrow-right"><svg width="50" height="50" viewBox="0 0 24 24">
+          <use xlink:href="#arrow-right"></use>
+        </svg></div>
+    </div>
+  </section>
+
+ 
+
+  
+
+    
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Include SmoothScroll library -->
+    <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll@15.0.0/dist/smooth-scroll.polyfills.min.js"></script>
+    
+    <script>
+        // Initialize SmoothScroll
+        const scroll = new SmoothScroll('a[href*="#"]', {
+            speed: 800,
+            speedAsDuration: true,
+            offset: 0,
+            easing: 'easeInOutCubic'
+        });
+        
+        // Cart functionality
+        let cartItems = [];
+        let cartCount = 0;
+
+        function updateCartCount() {
+            const cartCountElement = document.querySelector('.cart-count');
+            if (cartCountElement) {
+                cartCountElement.textContent = `(${cartCount})`;
+            }
+        }
+
+        function addToCart(productName, price) {
+            cartItems.push({ name: productName, price: price });
+            cartCount++;
+            updateCartCount();
+            
+            // Show success message
+            showAlert(`${productName} added to cart!`, 'success');
+        }
+
+        function removeFromCart(index) {
+            cartItems.splice(index, 1);
+            cartCount--;
+            updateCartCount();
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartList = document.querySelector('#offcanvasCart .list-group');
+            const cartTotal = document.querySelector('#offcanvasCart .list-group-item:last-child strong');
+            
+            if (cartList && cartItems.length > 0) {
+                let cartHTML = '';
+                let total = 0;
+                
+                cartItems.forEach((item, index) => {
+                    cartHTML += `
+                        <li class="list-group-item d-flex justify-content-between lh-sm">
+                            <div>
+                                <h6 class="my-0">${item.name}</h6>
+                                <small class="text-body-secondary">Product</small>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <span class="text-body-secondary me-3">$${item.price}</span>
+                                <button class="btn btn-sm btn-outline-danger" onclick="removeFromCart(${index})">
+                                    <svg width="16" height="16" viewBox="0 0 24 24">
+                                        <use xlink:href="#trash"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                        </li>
+                    `;
+                    total += item.price;
+                });
+                
+                cartHTML += `
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong>$${total}</strong>
+                    </li>
+                `;
+                
+                cartList.innerHTML = cartHTML;
+            } else if (cartList) {
+                cartList.innerHTML = '<li class="list-group-item text-center">Your cart is empty</li>';
+            }
+        }
+
+        // Search functionality
+        function initializeSearch() {
+            const searchButton = document.querySelector('.search-button');
+            const searchPopup = document.querySelector('.search-popup');
+            const searchForm = document.querySelector('.search-popup form');
+            const searchInput = document.getElementById('search-form');
+
+            if (searchButton && searchPopup) {
+                searchButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    searchPopup.classList.add('active');
+                    searchInput.focus();
+                });
+
+                // Close search on escape key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && searchPopup.classList.contains('active')) {
+                        searchPopup.classList.remove('active');
+                    }
+                });
+
+                // Close search on click outside
+                searchPopup.addEventListener('click', function(e) {
+                    if (e.target === searchPopup) {
+                        searchPopup.classList.remove('active');
+                    }
+                });
+
+                // Handle search form submission
+                if (searchForm) {
+                    searchForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const query = searchInput.value.trim();
+                        if (query) {
+                            performSearch(query);
+                            searchPopup.classList.remove('active');
+                        }
+                    });
+                }
+            }
+        }
+
+        function performSearch(query) {
+            // Simulate search functionality
+            showAlert(`Searching for: ${query}`, 'info');
+            // In a real application, you would make an API call here
+        }
+
+        // Wishlist functionality
+        function initializeWishlist() {
+            const wishlistButtons = document.querySelectorAll('.btn-wishlist');
+            
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const productName = this.closest('.product-item').querySelector('h5 a').textContent;
+                    
+                    if (this.classList.contains('active')) {
+                        this.classList.remove('active');
+                        showAlert(`${productName} removed from wishlist`, 'info');
+                    } else {
+                        this.classList.add('active');
+                        showAlert(`${productName} added to wishlist`, 'success');
+                    }
+                });
+            });
+        }
+
+        // Product actions
+        function initializeProductActions() {
+            // Add to cart buttons
+            const addToCartButtons = document.querySelectorAll('.product-item');
+            
+            addToCartButtons.forEach(item => {
+                const productName = item.querySelector('h5 a').textContent;
+                const productImage = item.querySelector('img');
+                
+                // Add click handler for product images
+                if (productImage) {
+                    productImage.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        showProductDetails(productName);
+                    });
+                }
+                
+                // Add "Chat With Us" functionality
+                const chatLinks = item.querySelectorAll('[data-after="Chat With Us"]');
+                chatLinks.forEach(link => {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        openChat(productName);
+                    });
+                });
+            });
+        }
+
+        function showProductDetails(productName) {
+            showAlert(`Viewing details for: ${productName}`, 'info');
+            // In a real application, you would navigate to a product detail page
+        }
+
+        function openChat(productName) {
+            showAlert(`Opening chat for: ${productName}`, 'info');
+            // In a real application, you would open a chat widget
+        }
+
+        // Category navigation
+        function initializeCategoryNavigation() {
+            const categoryLinks = document.querySelectorAll('.cat-list-item a, .dropdown-item');
+            
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Allow normal navigation - don't prevent default
+                    const category = this.textContent.trim();
+                    const href = this.getAttribute('href');
+                    
+                    // If there's a valid href, let it navigate normally
+                    if (href && href !== '#' && href !== '') {
+                        // Show alert and then navigate
+                        showAlert(`Navigating to: ${category}`, 'info');
+                        // Small delay to show the alert before navigation
+                        setTimeout(() => {
+                            window.location.href = href;
+                        }, 500);
+                    } else {
+                        // Fallback for links without href
+                        e.preventDefault();
+                        navigateToCategory(category);
+                    }
+                });
+            });
+            
+            // Manual dropdown toggle for better compatibility
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const dropdownMenu = this.nextElementSibling;
+                    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                        dropdownMenu.classList.toggle('show');
+                        this.setAttribute('aria-expanded', dropdownMenu.classList.contains('show'));
+                    }
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown')) {
+                    const openDropdowns = document.querySelectorAll('.dropdown-menu.show');
+                    openDropdowns.forEach(dropdown => {
+                        dropdown.classList.remove('show');
+                        const toggle = dropdown.previousElementSibling;
+                        if (toggle) {
+                            toggle.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                }
+            });
+        }
+
+        function navigateToCategory(category) {
+            // Map category names to their corresponding URLs
+            const categoryUrls = {
+                'Machinery Parts': 'machinery-parts.html',
+                'Hydraulic Parts': 'hydraulic-parts.html',
+                'Electrical Parts': 'electrical-parts.html',
+                'LED Light': 'led-light.html',
+                'Spreader Parts': 'spreader-parts.html'
+            };
+            
+            const url = categoryUrls[category];
+            if (url) {
+                showAlert(`Navigating to: ${category}`, 'info');
+                setTimeout(() => {
+                    window.location.href = url;
+                }, 500);
+            } else {
+                showAlert(`Category "${category}" not found`, 'warning');
+            }
+        }
+
+        // Newsletter signup
+        function initializeNewsletter() {
+            const newsletterForm = document.querySelector('#newsletter form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    if (email) {
+                        showAlert(`Newsletter subscription successful for: ${email}`, 'success');
+                        this.reset();
+                    }
+                });
+            }
+        }
+
+        // Alert system
+        function showAlert(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '1100';
+            alertDiv.style.minWidth = '300px';
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            
+            document.body.appendChild(alertDiv);
+            
+            // Auto-dismiss after 3 seconds
+            setTimeout(() => {
+                const bsAlert = new bootstrap.Alert(alertDiv);
+                bsAlert.close();
+            }, 3000);
+        }
+
+        // User state management
+        let currentUser = null;
+
+        // Show welcome message
+        function showWelcomeMessage(name) {
+            showAlert(`Welcome back, ${name}!`, 'success');
+        }
+
+        // Update auth UI based on user state
+        function updateAuthUI() {
+            const authTrigger = document.querySelector('.nav-link[href="#newsletter bg-light"]');
+            
+            if (currentUser) {
+                authTrigger.innerHTML = `
+                    <span class="user-avatar me-2">${currentUser.name.charAt(0).toUpperCase()}</span>
+                    ${currentUser.name}
+                `;
+                authTrigger.setAttribute('title', 'Signed in as ' + currentUser.name);
+                authTrigger.removeAttribute('href');
+                
+                // Add click handler for logout
+                authTrigger.onclick = function(e) {
+                    e.preventDefault();
+                    currentUser = null;
+                    updateAuthUI();
+                    showAlert('Successfully logged out', 'info');
+                };
+            } else {
+                authTrigger.innerHTML = 'Sign In';
+                authTrigger.setAttribute('href', '#newsletter bg-light');
+                authTrigger.setAttribute('data-bs-toggle', 'modal');
+                authTrigger.setAttribute('data-bs-target', '#signInModal');
+                authTrigger.onclick = null;
+            }
+        }
+
+        // Form submission handlers
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            if (!email || !password) {
+                showAlert('Please fill in all fields', 'warning');
+                return;
+            }
+            
+            // In a real app, you would verify credentials with a server
+            const name = email.split('@')[0];
+            currentUser = { name: name, email: email };
+            
+            updateAuthUI();
+            showWelcomeMessage(name);
+            
+            // Close the modal and clean up backdrop
+            const modal = bootstrap.Modal.getInstance(document.getElementById('signInModal'));
+            modal.hide();
+            
+            // Ensure backdrop is removed immediately and after a delay
+            cleanupModalBackdrop();
+            setTimeout(cleanupModalBackdrop, 100);
+            setTimeout(cleanupModalBackdrop, 300);
+        }
+
+        function handleSignup(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            if (!name || !email || !password || !confirmPassword) {
+                showAlert('Please fill in all fields', 'warning');
+                return;
+            }
+            
+            if (password !== confirmPassword) {
+                showAlert('Passwords do not match!', 'danger');
+                return;
+            }
+            
+            currentUser = { name: name, email: email };
+            updateAuthUI();
+            showWelcomeMessage(name);
+            
+            // Close the modal and clean up backdrop
+            const modal = bootstrap.Modal.getInstance(document.getElementById('signUpModal'));
+            modal.hide();
+            
+            // Ensure backdrop is removed immediately and after a delay
+            cleanupModalBackdrop();
+            setTimeout(cleanupModalBackdrop, 100);
+            setTimeout(cleanupModalBackdrop, 300);
+        }
+
+        function handleForgotPassword(e) {
+            e.preventDefault();
+            const email = document.getElementById('forgotEmail').value;
+            
+            if (!email) {
+                showAlert('Please enter your email address', 'warning');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showAlert('Please enter a valid email address', 'warning');
+                return;
+            }
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+            
+            // Send password reset email using EmailJS
+            sendPasswordResetEmail(email, submitBtn, originalBtnText);
+        }
+
+        function sendPasswordResetEmail(email, submitBtn, originalBtnText) {
+            // Generate a unique reset token
+            const resetToken = generateResetToken();
+            
+            // Store the reset token (in a real app, this would be in a database)
+            localStorage.setItem(`resetToken_${email}`, resetToken);
+            localStorage.setItem(`resetTokenExpiry_${email}`, Date.now() + (60 * 60 * 1000)); // 1 hour expiry
+            
+            // Create the reset link
+            const resetLink = `${window.location.origin}${window.location.pathname}?reset=true&token=${resetToken}&email=${encodeURIComponent(email)}`;
+            
+            // Email template for password reset
+            const emailTemplate = {
+                to_email: email,
+                to_name: email.split('@')[0],
+                reset_link: resetLink,
+                company_name: 'Kaira',
+                expiry_time: '1 hour'
+            };
+            
+            // Simulate email sending with a delay
+            setTimeout(() => {
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalBtnText;
+                
+                const modal = bootstrap.Modal.getInstance(document.getElementById('forgotPasswordModal'));
+                modal.hide();
+                
+                // Show the reset link directly to the user for demonstration
+                showResetLinkToUser(email, resetLink);
+            }, 2000);
+        }
+
+        function showResetLinkToUser(email, resetLink) {
+            // Create a modal to show the reset link
+            const resetLinkModalHTML = `
+                <div class="modal fade" id="resetLinkModal" tabindex="-1" aria-labelledby="resetLinkModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title text-uppercase" id="resetLinkModalLabel">Password Reset Link</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body px-4 pb-4 pt-0">
+                                <div class="alert alert-info">
+                                    <strong>Password reset link generated!</strong><br>
+                                    In a real application, this link would be sent to: <strong>${email}</strong>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Reset Link (Click to copy):</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" id="resetLinkInput" value="${resetLink}" readonly>
+                                        <button class="btn btn-outline-secondary" type="button" onclick="copyResetLink()">
+                                            <svg width="16" height="16" viewBox="0 0 24 24">
+                                                <use xlink:href="#copy"></use>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary" onclick="openResetLink()">Open Reset Link</button>
+                                    <button class="btn btn-outline-secondary" onclick="closeResetLinkModal()">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add the modal to the page
+            document.body.insertAdjacentHTML('beforeend', resetLinkModalHTML);
+            
+            // Show the modal
+            const resetLinkModal = new bootstrap.Modal(document.getElementById('resetLinkModal'));
+            resetLinkModal.show();
+        }
+
+        function copyResetLink() {
+            const resetLinkInput = document.getElementById('resetLinkInput');
+            resetLinkInput.select();
+            resetLinkInput.setSelectionRange(0, 99999); // For mobile devices
+            document.execCommand('copy');
+            showAlert('Reset link copied to clipboard!', 'success');
+        }
+
+        function openResetLink() {
+            const resetLink = document.getElementById('resetLinkInput').value;
+            window.open(resetLink, '_blank');
+        }
+
+        function closeResetLinkModal() {
+            const modal = bootstrap.Modal.getInstance(document.getElementById('resetLinkModal'));
+            modal.hide();
+            
+            // Clean up the modal
+            setTimeout(() => {
+                const modalElement = document.getElementById('resetLinkModal');
+                if (modalElement) {
+                    modalElement.remove();
+                }
+            }, 1000);
+        }
+
+        function sendManualResetEmail(email, emailTemplate) {
+            // Create a mailto link as fallback
+            const subject = 'Password Reset Request - Kaira';
+            const body = `Hello ${emailTemplate.to_name},
+
+You have requested a password reset for your Kaira account.
+
+Please click the following link to reset your password:
+${emailTemplate.reset_link}
+
+This link will expire in ${emailTemplate.expiry_time}.
+
+If you did not request this password reset, please ignore this email.
+
+Best regards,
+The Kaira Team
+
+---
+This is an automated message. Please do not reply to this email.`;
+
+            const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Show instructions to user
+            showAlert(`Email service not available. Please manually send a password reset email to ${email}`, 'info');
+            
+            // Open default email client
+            setTimeout(() => {
+                if (confirm('Would you like to open your default email client to send the reset email?')) {
+                    window.open(mailtoLink);
+                }
+            }, 1000);
+        }
+
+        function generateResetToken() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let token = '';
+            for (let i = 0; i < 32; i++) {
+                token += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return token;
+        }
+
+        function checkForResetToken() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const reset = urlParams.get('reset');
+            const token = urlParams.get('token');
+            const email = urlParams.get('email');
+            
+            if (reset === 'true' && token && email) {
+                // Verify the token
+                const storedToken = localStorage.getItem(`resetToken_${email}`);
+                const tokenExpiry = localStorage.getItem(`resetTokenExpiry_${email}`);
+                
+                if (storedToken === token && Date.now() < parseInt(tokenExpiry)) {
+                    showResetPasswordForm(email, token);
+                } else {
+                    showAlert('Invalid or expired reset link. Please request a new password reset.', 'danger');
+                }
+            }
+        }
+
+        function showResetPasswordForm(email, token) {
+            // Create and show a new password form
+            const resetFormHTML = `
+                <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title text-uppercase" id="resetPasswordModalLabel">Set New Password</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body px-4 pb-4 pt-0">
+                                <form id="newPasswordForm">
+                                    <input type="hidden" id="resetEmail" value="${email}">
+                                    <input type="hidden" id="resetToken" value="${token}">
+                                    <div class="mb-3">
+                                        <label for="newPassword" class="form-label">New Password</label>
+                                        <input type="password" class="form-control rounded-0" id="newPassword" required minlength="8">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="confirmNewPassword" class="form-label">Confirm New Password</label>
+                                        <input type="password" class="form-control rounded-0" id="confirmNewPassword" required minlength="8">
+                                    </div>
+                                    <button type="submit" class="btn btn-dark w-100 rounded-0 text-uppercase">Update Password</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Add the modal to the page
+            document.body.insertAdjacentHTML('beforeend', resetFormHTML);
+            
+            // Show the modal
+            const resetModal = new bootstrap.Modal(document.getElementById('resetPasswordModal'));
+            resetModal.show();
+            
+            // Handle form submission
+            document.getElementById('newPasswordForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmPassword = document.getElementById('confirmNewPassword').value;
+                
+                if (newPassword !== confirmPassword) {
+                    showAlert('Passwords do not match!', 'danger');
+                    return;
+                }
+                
+                if (newPassword.length < 8) {
+                    showAlert('Password must be at least 8 characters long!', 'warning');
+                    return;
+                }
+                
+                // Update password (in a real app, this would update the database)
+                localStorage.setItem(`userPassword_${email}`, newPassword);
+                
+                // Clear the reset token
+                localStorage.removeItem(`resetToken_${email}`);
+                localStorage.removeItem(`resetTokenExpiry_${email}`);
+                
+                // Close modal and show success message
+                resetModal.hide();
+                showAlert('Password updated successfully! You can now sign in with your new password.', 'success');
+                
+                // Clean up the modal
+                setTimeout(() => {
+                    const modalElement = document.getElementById('resetPasswordModal');
+                    if (modalElement) {
+                        modalElement.remove();
+                    }
+                }, 1000);
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check for password reset token in URL
+            checkForResetToken();
+            
+            // Initialize Bootstrap dropdowns
+            var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+            var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+                return new bootstrap.Dropdown(dropdownToggleEl);
+            });
+            
+            // Initialize all functionality
+            initializeSearch();
+            initializeWishlist();
+            initializeProductActions();
+            initializeCategoryNavigation();
+            initializeNewsletter();
+            
+            // Set up form handlers
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const forgotPasswordForm = document.getElementById('forgotPasswordForm');
+            
+            if (loginForm) loginForm.addEventListener('submit', handleLogin);
+            if (signupForm) signupForm.addEventListener('submit', handleSignup);
+            if (forgotPasswordForm) forgotPasswordForm.addEventListener('submit', handleForgotPassword);
+            
+            // Initialize cart
+            updateCartCount();
+            updateCartDisplay();
+            
+            // Initialize auth UI
+            updateAuthUI();
+            
+            // Add modal backdrop cleanup event listeners
+            const modals = ['signInModal', 'signUpModal', 'forgotPasswordModal'];
+            modals.forEach(modalId => {
+                const modalElement = document.getElementById(modalId);
+                if (modalElement) {
+                    modalElement.addEventListener('hidden.bs.modal', function() {
+                        cleanupModalBackdrop();
+                    });
+                    
+                    // Also add event listener for when modal starts hiding
+                    modalElement.addEventListener('hide.bs.modal', function() {
+                        // Start cleanup immediately when modal starts hiding
+                        setTimeout(cleanupModalBackdrop, 50);
+                    });
+                }
+            });
+            
+            // Global function to clean up modal backdrop
+            window.cleanupModalBackdrop = function() {
+                // Remove all modal backdrops
+                const backdrops = document.querySelectorAll('.modal-backdrop');
+                backdrops.forEach(backdrop => {
+                    backdrop.remove();
+                });
+                
+                // Remove modal-open class from body
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
+                
+                // Force enable pointer events on body
+                document.body.style.pointerEvents = 'auto';
+                
+                // Remove any fixed positioning that might be blocking clicks
+                const fixedElements = document.querySelectorAll('[style*="position: fixed"]');
+                fixedElements.forEach(element => {
+                    if (element.classList.contains('modal-backdrop') || element.style.zIndex === '1055') {
+                        element.remove();
+                    }
+                });
+                
+                // Hide emergency button if backdrop is cleaned
+                const emergencyBtn = document.getElementById('emergencyCleanup');
+                if (emergencyBtn) {
+                    emergencyBtn.style.display = 'none';
+                }
+            };
+            
+            // Emergency cleanup function
+            window.emergencyModalCleanup = function() {
+                // Aggressive cleanup
+                cleanupModalBackdrop();
+                
+                // Force remove all modal-related elements
+                const allModals = document.querySelectorAll('.modal');
+                allModals.forEach(modal => {
+                    if (modal.classList.contains('show')) {
+                        modal.classList.remove('show');
+                        modal.style.display = 'none';
+                    }
+                });
+                
+                // Remove all backdrops
+                const allBackdrops = document.querySelectorAll('.modal-backdrop');
+                allBackdrops.forEach(backdrop => backdrop.remove());
+                
+                // Reset body completely
+                document.body.classList.remove('modal-open');
+                document.body.style.overflow = '';
+                document.body.style.paddingRight = '';
+                document.body.style.pointerEvents = 'auto';
+                
+                // Hide emergency button
+                const emergencyBtn = document.getElementById('emergencyCleanup');
+                if (emergencyBtn) {
+                    emergencyBtn.style.display = 'none';
+                }
+                
+                alert('Modal cleanup completed!');
+            };
+            
+            // Check for stuck modals every 2 seconds
+            setInterval(() => {
+                const backdrops = document.querySelectorAll('.modal-backdrop');
+                const modalOpen = document.body.classList.contains('modal-open');
+                const emergencyBtn = document.getElementById('emergencyCleanup');
+                
+                if ((backdrops.length > 0 || modalOpen) && emergencyBtn) {
+                    emergencyBtn.style.display = 'block';
+                }
+            }, 2000);
+            
+            // Custom modal switching functions to prevent backdrop issues
+            window.switchToSignup = function() {
+                // Clean up current modal backdrop first
+                cleanupModalBackdrop();
+                
+                // Close current modal
+                const currentModal = bootstrap.Modal.getInstance(document.querySelector('.modal.show'));
+                if (currentModal) {
+                    currentModal.hide();
+                }
+                
+                // Wait a bit then open signup modal
+                setTimeout(() => {
+                    const signupModal = new bootstrap.Modal(document.getElementById('signUpModal'));
+                    signupModal.show();
+                }, 150);
+            };
+            
+            window.switchToSignin = function() {
+                // Clean up current modal backdrop first
+                cleanupModalBackdrop();
+                
+                // Close current modal
+                const currentModal = bootstrap.Modal.getInstance(document.querySelector('.modal.show'));
+                if (currentModal) {
+                    currentModal.hide();
+                }
+                
+                // Wait a bit then open signin modal
+                setTimeout(() => {
+                    const signinModal = new bootstrap.Modal(document.getElementById('signInModal'));
+                    signinModal.show();
+                }, 150);
+            };
+            
+            // Add some sample products to cart for demonstration
+            setTimeout(() => {
+                addToCart('High Speed Brake', 299);
+                addToCart('Thruster', 450);
+                addToCart('Telephone', 89);
+            }, 1000);
+        });
+
+        // Handle scroll-to-top button
+        const scrollTopBtn = document.querySelector('.scroll-top');
+        if (scrollTopBtn) {
+            scrollTopBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                scroll.animateScroll(0);
+            });
+        }
+
+        // Show/hide scroll-to-top button based on scroll position
+        window.addEventListener('scroll', function() {
+            const scrollTopBtn = document.querySelector('.scroll-top');
+            if (scrollTopBtn) {
+                if (window.pageYOffset > 300) {
+                    scrollTopBtn.style.display = 'block';
+                } else {
+                    scrollTopBtn.style.display = 'none';
+                }
+            }
+        });
+    </script>
+  
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" title="Scroll to top">
+    <svg width="20" height="20" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/>
+    </svg>
+  </button>
+  
+  <!-- Emergency Modal Cleanup Button (hidden by default) -->
+  <button id="emergencyCleanup" style="position: fixed; top: 10px; right: 10px; z-index: 9999; background: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; display: none;" onclick="emergencyModalCleanup()">
+    Fix Modal
+  </button>
+
+  <footer id="footer" class="mt-5">
+    <div class="container">
+      <div class="row d-flex flex-wrap justify-content-between py-5">
+        <div class="col-md-3 col-sm-6">
+          <div class="footer-menu footer-menu-001">
+            <div class="footer-intro mb-4" >
+              <a href="index.html">
+                <img src="images/logo.jpg" alt="logo" width="150px">
+              </a>
+            </div>
+            
+            <div class="social-links">
+              <ul class="list-unstyled d-flex flex-wrap gap-3">
+                
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+          <div class="footer-menu footer-menu-002">
+            <h5 class="widget-title text-uppercase mb-4">Quick Links</h5>
+            <ul class="menu-list list-unstyled text-uppercase border-animation-left fs-6">
+              <li class="menu-item">
+                <a href="index.html" class="item-anchor">Home</a>
+              </li>
+              <li class="menu-item">
+                <a href="index.html" class="item-anchor">About</a>
+              </li>
+             
+              <li class="menu-item">
+                <a href="index.html" class="item-anchor">Contact</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="col-md-3 col-sm-6">
+          <div class="footer-menu footer-menu-004 border-animation-left">
+            <h5 class="widget-title text-uppercase mb-4">Contact Us</h5>
+            <p>Do you have any questions or suggestions? <a href="mailto:contact@yourcompany.com"
+                class="item-anchor">khmcyao@163.com</a></p>
+            <p>Do you need support? Give us a call. <a href="tel:+86 18221243735" class="item-anchor">+86 18221243735
+                </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+          
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <script src="js/jquery.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/SmoothScroll.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <!-- EmailJS for email functionality -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script src="js/script.min.js"></script>ٍ
+</body>
+
+</html>
