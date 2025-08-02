@@ -274,7 +274,7 @@ a {
 .preloader {
   position: fixed;
   z-index: 99;
-  background: #111;
+  background: #11111100;
   width: 100vw;
   height: 100vh;
   display: flex;
